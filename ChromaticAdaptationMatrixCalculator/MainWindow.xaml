@@ -1,0 +1,35 @@
+﻿<Window x:Class="ChromaticAdaptationMatrixCalculator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ChromaticAdaptationMatrixCalculator"
+        mc:Ignorable="d"
+        Title="Chromatic Adaptation Matrix Calculator" Height="450" Width="800">
+    <Grid>
+        <StackPanel>
+            <WrapPanel>
+                <Label>Input white point tristimulus:</Label>
+                <Label>X:</Label>
+                <TextBox x:Name="inX_text" KeyUp="tristimulus_KeyUp">1.000</TextBox>
+                <Label>Y:</Label>
+                <TextBox x:Name="inY_text" KeyUp="tristimulus_KeyUp">1.000</TextBox>
+                <Label>Z:</Label>
+                <TextBox x:Name="inZ_text" KeyUp="tristimulus_KeyUp">1.000</TextBox>
+            </WrapPanel>
+            <WrapPanel>
+                <Label>Output white point tristimulus:</Label>
+                <Label>X:</Label>
+                <TextBox x:Name="outX_text" KeyUp="tristimulus_KeyUp">1.000</TextBox>
+                <Label>Y:</Label>
+                <TextBox x:Name="outY_text" KeyUp="tristimulus_KeyUp">1.000</TextBox>
+                <Label>Z:</Label>
+                <TextBox x:Name="outZ_text" KeyUp="tristimulus_KeyUp">1.000</TextBox>
+            </WrapPanel>
+            <Label>Matrix to apply to XYZ data:</Label>
+            <TextBox TextWrapping="Wrap" x:Name="matrix_text" Height="80" Width="250">
+                
+            </TextBox>
+        </StackPanel>
+    </Grid>
+</Window>
