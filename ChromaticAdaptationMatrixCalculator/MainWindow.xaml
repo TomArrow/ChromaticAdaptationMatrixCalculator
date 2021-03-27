@@ -9,6 +9,20 @@
     <Grid>
         <StackPanel>
             <WrapPanel>
+                <Label>Input white point x,y:</Label>
+                <Label>x:</Label>
+                <TextBox x:Name="inx_text" KeyUp="xy_KeyUp">1.000</TextBox>
+                <Label>y:</Label>
+                <TextBox x:Name="iny_text" KeyUp="xy_KeyUp">1.000</TextBox>
+            </WrapPanel>
+            <WrapPanel>
+                <Label>Output white point white point x,y:</Label>
+                <Label>x:</Label>
+                <TextBox x:Name="outx_text" KeyUp="xy_KeyUp">1.000</TextBox>
+                <Label>y:</Label>
+                <TextBox x:Name="outy_text" KeyUp="xy_KeyUp">1.000</TextBox>
+            </WrapPanel>
+            <WrapPanel>
                 <Label>Input white point tristimulus:</Label>
                 <Label>X:</Label>
                 <TextBox x:Name="inX_text" KeyUp="tristimulus_KeyUp">1.000</TextBox>

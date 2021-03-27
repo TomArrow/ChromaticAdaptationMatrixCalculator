@@ -33,6 +33,9 @@ namespace ChromaticAdaptationMatrixCalculator
             0.432305, 0.51836, 0.0492912, 
             -0.00852866, 0.0400428, 0.968487 };
 
+
+        string numberFormat = "0." + (new string('#', 4));
+
         private void doUpdate()
         {
             double[] tristimulusIn = new double[3];
@@ -64,7 +67,6 @@ namespace ChromaticAdaptationMatrixCalculator
             //matrix = adaptationInBradford;
 
             //string numberFormat = "0." + (new string('#', 339));
-            string numberFormat = "0." + (new string('#', 4));
 
             matrix_text.Text = matrix[0].ToString(numberFormat, CultureInfo.InvariantCulture) + " " + matrix[1].ToString(numberFormat, CultureInfo.InvariantCulture) + " " + matrix[2].ToString(numberFormat, CultureInfo.InvariantCulture) + "\r\n"+
                 matrix[3].ToString(numberFormat, CultureInfo.InvariantCulture) + " " + matrix[4].ToString(numberFormat, CultureInfo.InvariantCulture) + " " + matrix[5].ToString(numberFormat, CultureInfo.InvariantCulture) + "\r\n"+
@@ -83,6 +85,42 @@ namespace ChromaticAdaptationMatrixCalculator
 
         private void tristimulus_KeyUp(object sender, KeyEventArgs e)
         {
+            doUpdate();
+        }
+
+        // Convert x,y to XYZ
+        private void xy_KeyUp(object sender, KeyEventArgs e)
+        {
+            double[] inWhite = new double[2];
+            double[] outWhite = new double[2];
+
+            double.TryParse(inx_text.Text, out inWhite[0]);
+            double.TryParse(iny_text.Text, out inWhite[1]);
+            double.TryParse(outx_text.Text, out outWhite[0]);
+            double.TryParse(outy_text.Text, out outWhite[1]);
+
+            double[] tristimulusIn = new double[3];
+            double[] tristimulusOut = new double[3];
+
+            double Y = 1;
+
+            tristimulusIn[1] = Y;
+            tristimulusOut[1] = Y;
+
+            tristimulusIn[0] = inWhite[0] * Y / inWhite[1];
+            tristimulusIn[2] = (1 - inWhite[0] - inWhite[1]) * Y / inWhite[1];
+
+            tristimulusOut[0] = outWhite[0] * Y / outWhite[1];
+            tristimulusOut[2] = (1 - outWhite[0] - outWhite[1]) * Y / outWhite[1];
+
+            inX_text.Text = tristimulusIn[0].ToString(numberFormat, CultureInfo.InvariantCulture);
+            inY_text.Text = tristimulusIn[1].ToString(numberFormat, CultureInfo.InvariantCulture);
+            inZ_text.Text = tristimulusIn[2].ToString(numberFormat, CultureInfo.InvariantCulture);
+
+            outX_text.Text = tristimulusOut[0].ToString(numberFormat, CultureInfo.InvariantCulture);
+            outY_text.Text = tristimulusOut[1].ToString(numberFormat, CultureInfo.InvariantCulture);
+            outZ_text.Text = tristimulusOut[2].ToString(numberFormat, CultureInfo.InvariantCulture);
+
             doUpdate();
         }
     }
