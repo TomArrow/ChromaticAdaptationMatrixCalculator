@@ -8,42 +8,100 @@
         Title="Chromatic Adaptation Matrix Calculator" Height="450" Width="800">
     <Grid>
         <StackPanel>
-            <WrapPanel>
-                <Label>Input white point x,y:</Label>
-                <Label>x:</Label>
-                <TextBox x:Name="inx_text" KeyUp="xy_KeyUp">1.000</TextBox>
-                <Label>y:</Label>
-                <TextBox x:Name="iny_text" KeyUp="xy_KeyUp">1.000</TextBox>
-            </WrapPanel>
-            <WrapPanel>
-                <Label>Output white point white point x,y:</Label>
-                <Label>x:</Label>
-                <TextBox x:Name="outx_text" KeyUp="xy_KeyUp">1.000</TextBox>
-                <Label>y:</Label>
-                <TextBox x:Name="outy_text" KeyUp="xy_KeyUp">1.000</TextBox>
-            </WrapPanel>
-            <WrapPanel>
-                <Label>Input white point tristimulus:</Label>
-                <Label>X:</Label>
-                <TextBox x:Name="inX_text" KeyUp="tristimulus_KeyUp">1.000</TextBox>
-                <Label>Y:</Label>
-                <TextBox x:Name="inY_text" KeyUp="tristimulus_KeyUp">1.000</TextBox>
-                <Label>Z:</Label>
-                <TextBox x:Name="inZ_text" KeyUp="tristimulus_KeyUp">1.000</TextBox>
-            </WrapPanel>
-            <WrapPanel>
-                <Label>Output white point tristimulus:</Label>
-                <Label>X:</Label>
-                <TextBox x:Name="outX_text" KeyUp="tristimulus_KeyUp">1.000</TextBox>
-                <Label>Y:</Label>
-                <TextBox x:Name="outY_text" KeyUp="tristimulus_KeyUp">1.000</TextBox>
-                <Label>Z:</Label>
-                <TextBox x:Name="outZ_text" KeyUp="tristimulus_KeyUp">1.000</TextBox>
-            </WrapPanel>
-            <Label>Matrix to apply to XYZ data:</Label>
-            <TextBox TextWrapping="Wrap" x:Name="matrix_text" Height="80" Width="250">
-                
-            </TextBox>
+            <TabControl>
+                <TabItem Header="Chromatic adaptation matrix">
+                    <StackPanel>
+                        <WrapPanel>
+                            <Label>Input white point x,y:</Label>
+                            <Label>x:</Label>
+                            <TextBox x:Name="inx_text" KeyUp="xy_KeyUp">1.000</TextBox>
+                            <Label>y:</Label>
+                            <TextBox x:Name="iny_text" KeyUp="xy_KeyUp">1.000</TextBox>
+                        </WrapPanel>
+                        <WrapPanel>
+                            <Label>Output white point white point x,y:</Label>
+                            <Label>x:</Label>
+                            <TextBox x:Name="outx_text" KeyUp="xy_KeyUp">1.000</TextBox>
+                            <Label>y:</Label>
+                            <TextBox x:Name="outy_text" KeyUp="xy_KeyUp">1.000</TextBox>
+                        </WrapPanel>
+                        <WrapPanel>
+                            <Label>Input white point tristimulus:</Label>
+                            <Label>X:</Label>
+                            <TextBox x:Name="inX_text" KeyUp="tristimulus_KeyUp">1.000</TextBox>
+                            <Label>Y:</Label>
+                            <TextBox x:Name="inY_text" KeyUp="tristimulus_KeyUp">1.000</TextBox>
+                            <Label>Z:</Label>
+                            <TextBox x:Name="inZ_text" KeyUp="tristimulus_KeyUp">1.000</TextBox>
+                        </WrapPanel>
+                        <WrapPanel>
+                            <Label>Output white point tristimulus:</Label>
+                            <Label>X:</Label>
+                            <TextBox x:Name="outX_text" KeyUp="tristimulus_KeyUp">1.000</TextBox>
+                            <Label>Y:</Label>
+                            <TextBox x:Name="outY_text" KeyUp="tristimulus_KeyUp">1.000</TextBox>
+                            <Label>Z:</Label>
+                            <TextBox x:Name="outZ_text" KeyUp="tristimulus_KeyUp">1.000</TextBox>
+                        </WrapPanel>
+                        <Label>Matrix to apply to XYZ data:</Label>
+                        <TextBox TextWrapping="Wrap" x:Name="matrix_text" Height="80" Width="250">
+
+                        </TextBox>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="RGB/XYZ transform matrix">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0">
+                                <WrapPanel>
+                                    <Label>Color space white point x,y:</Label>
+                                    <Label>x:</Label>
+                                    <TextBox x:Name="RGBXYZwhitex_text" KeyUp="rgbxyz_KeyUp">1.000</TextBox>
+                                    <Label>y:</Label>
+                                <TextBox x:Name="RGBXYZwhitey_text" KeyUp="rgbxyz_KeyUp">1.000</TextBox>
+                                </WrapPanel>
+                                <WrapPanel>
+                                    <Label>Color space red x,y:</Label>
+                                    <Label>x:</Label>
+                                <TextBox x:Name="RGBXYZredx_text" KeyUp="rgbxyz_KeyUp">1.000</TextBox>
+                                    <Label>y:</Label>
+                                <TextBox x:Name="RGBXYZredy_text" KeyUp="rgbxyz_KeyUp">1.000</TextBox>
+                                </WrapPanel>
+                                <WrapPanel>
+                                    <Label>Color space green x,y:</Label>
+                                    <Label>x:</Label>
+                                <TextBox x:Name="RGBXYZgreenx_text" KeyUp="rgbxyz_KeyUp">1.000</TextBox>
+                                    <Label>y:</Label>
+                                <TextBox x:Name="RGBXYZgreeny_text" KeyUp="rgbxyz_KeyUp">1.000</TextBox>
+                                </WrapPanel>
+                                <WrapPanel>
+                                    <Label>Color space blue x,y:</Label>
+                                    <Label>x:</Label>
+                                <TextBox x:Name="RGBXYZbluex_text" KeyUp="rgbxyz_KeyUp">1.000</TextBox>
+                                    <Label>y:</Label>
+                                <TextBox x:Name="RGBXYZbluey_text" KeyUp="rgbxyz_KeyUp">1.000</TextBox>
+                                </WrapPanel>
+                                <CheckBox x:Name="RGBXYZdoChromaticallyAdapt" Checked="RGBXYZdoChromaticallyAdapt_Checked" Unchecked="RGBXYZdoChromaticallyAdapt_Checked">Chromatically adapt to D50 - ICC profile standard (Bradford)</CheckBox>
+                                <CheckBox x:Name="RGBXYZdoChromaticallyAdaptXYZ" Checked="RGBXYZdoChromaticallyAdapt_Checked" Unchecked="RGBXYZdoChromaticallyAdapt_Checked">Chromatically adapt to XYZ (0.333,0.333) (Bradford) (experimental)</CheckBox>
+                                <Label>RGB to XYZ matrix:</Label>
+                                <TextBox TextWrapping="Wrap" x:Name="matrixRGBtoXYZ_text" Height="80" Width="250">
+
+                                </TextBox>
+                                <Button x:Name="btnSaveRGBtoXYZCHA" Click="btnSaveRGBtoXYZCHA_Click">Save RGB to XYZ CHA</Button>
+                                <Label>XYZ to RGB matrix:</Label>
+                                <TextBox TextWrapping="Wrap" x:Name="matrixXYZtoRGB_text" Height="80" Width="250">
+
+                            </TextBox>
+                            <Button x:Name="btnSaveXYZtoRGBCHA" Click="btnSaveXYZtoRGBCHA_Click">Save XYZ to RGB CHA</Button>
+                        </StackPanel>
+                        </Grid>
+                </TabItem>
+            </TabControl>
+            
         </StackPanel>
     </Grid>
 </Window>
