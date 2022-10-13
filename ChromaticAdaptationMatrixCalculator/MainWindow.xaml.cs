@@ -93,10 +93,6 @@ namespace ChromaticAdaptationMatrixCalculator
             return multiplied;
         }
 
-        private void tristimulus_KeyUp(object sender, KeyEventArgs e)
-        {
-            doUpdate();
-        }
 
         private double[] xyToTristimulus(double[] xy)
         {
@@ -112,6 +108,47 @@ namespace ChromaticAdaptationMatrixCalculator
         }
 
 
+        private void tristimulus_KeyUp(object sender, KeyEventArgs e)
+        {
+            if((sender as TextBox).Name.Substring(0,3) == "out")
+            {
+
+                double[] tristimulusOut = new double[3];
+                double.TryParse(outX_text.Text, out tristimulusOut[0]);
+                double.TryParse(outY_text.Text, out tristimulusOut[1]);
+                double.TryParse(outZ_text.Text, out tristimulusOut[2]);
+
+                double[] xy = tristimulusToxy(tristimulusOut);
+
+                outx_text.Text = doubleToString(xy[0]);
+                outy_text.Text = doubleToString(xy[1]);
+
+            } else if ((sender as TextBox).Name.Substring(0, 2) == "in")
+            {
+
+                double[] tristimulusIn = new double[3];
+                double.TryParse(inX_text.Text, out tristimulusIn[0]);
+                double.TryParse(inY_text.Text, out tristimulusIn[1]);
+                double.TryParse(inZ_text.Text, out tristimulusIn[2]);
+
+                double[] xy = tristimulusToxy(tristimulusIn);
+
+                inx_text.Text = doubleToString(xy[0]);
+                iny_text.Text = doubleToString(xy[1]);
+            }
+            
+
+
+            doUpdate();
+        }
+
+        private double[] tristimulusToxy(double[] tristimulus)
+        {
+            double x = tristimulus[0] / (tristimulus[0]+ tristimulus[1]+ tristimulus[2]);
+            double y = tristimulus[1] / (tristimulus[0]+ tristimulus[1]+ tristimulus[2]);
+            //double Y = tristimulus[1];
+            return new double[] { x,y };
+        }
 
         // Convert x,y to XYZ
         private void xy_KeyUp(object sender, KeyEventArgs e)
@@ -127,18 +164,6 @@ namespace ChromaticAdaptationMatrixCalculator
             double[] tristimulusIn = xyToTristimulus(inWhite);//new double[3];
             double[] tristimulusOut = xyToTristimulus(outWhite);//new double[3];
 
-            /*
-            double Y = 1;
-
-            tristimulusIn[1] = Y;
-            tristimulusOut[1] = Y;
-
-            tristimulusIn[0] = inWhite[0] * Y / inWhite[1];
-            tristimulusIn[2] = (1 - inWhite[0] - inWhite[1]) * Y / inWhite[1];
-
-            tristimulusOut[0] = outWhite[0] * Y / outWhite[1];
-            tristimulusOut[2] = (1 - outWhite[0] - outWhite[1]) * Y / outWhite[1];
-            */
             inX_text.Text = tristimulusIn[0].ToString(numberFormat, CultureInfo.InvariantCulture);
             inY_text.Text = tristimulusIn[1].ToString(numberFormat, CultureInfo.InvariantCulture);
             inZ_text.Text = tristimulusIn[2].ToString(numberFormat, CultureInfo.InvariantCulture);
@@ -290,7 +315,7 @@ namespace ChromaticAdaptationMatrixCalculator
 
             double[] matrix = getRGBXYZMatrix();
             matrix = matrixInvert(matrix);
-            CHASave(matrix, "_RGBtoXYZ");
+            CHASave(matrix, "_XYZtoRGB");
         }
 
         private void CHASave(double[] matrix, string proposedFileName = "matrix")
